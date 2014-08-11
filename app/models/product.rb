@@ -13,4 +13,11 @@
 #
 
 class Product < ActiveRecord::Base
+	belongs_to :category
+	before_save :calculate_total
+
+	private
+	def calculate_total
+		self.total_price = ((tax_rate+100)/100) * price 
+	end
 end
