@@ -26,7 +26,7 @@ class ProductsController < ApplicationController
   end
 
   def index
-    @products = Product.all
+    @products = Product.find(params[:category_id])
     render json: @products
   end
 

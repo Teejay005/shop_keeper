@@ -26,7 +26,7 @@ class CategoriesController < ApplicationController
   end
 
   def index
-    @categories = Category.all
+    @categories = Category.find(params[:shop_id])
     render json: @categories
   end
 
