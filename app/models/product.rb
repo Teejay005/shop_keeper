@@ -9,7 +9,7 @@
 #  tax_rate    :decimal(, )
 #  created_at  :datetime
 #  updated_at  :datetime
-#  total_price :float
+#  total_price :decimal(, )
 #
 
 class Product < ActiveRecord::Base
