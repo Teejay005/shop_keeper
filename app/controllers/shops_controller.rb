@@ -27,7 +27,7 @@ class ShopsController < ApplicationController
 
   def show
   	@shop = Shop.find(params[:id])
-  	render json: @shop
+  	render json: @shop.to_json
   end
 
   def delete

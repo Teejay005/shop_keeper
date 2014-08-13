@@ -1,7 +1,7 @@
 class ShopController < ApplicationController
   def index
   	@shops = Shop.all
-  	render json: @shops
+  	render json: @shops.to_json
   end
 
   def create
@@ -13,7 +13,7 @@ class ShopController < ApplicationController
 
   def show
   	@shop = Show.find(params[:id])
-  	render json: @shop
+  	render json: @shop.to_json
   end
 
   def delete

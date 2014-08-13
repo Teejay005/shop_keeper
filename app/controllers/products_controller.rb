@@ -8,7 +8,7 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params.merge(category: @category))
     if @product.save
-      render json: @product
+      render json: @product.to_json
     else
       render :new
     end
@@ -19,7 +19,7 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
-    render json: @product
+    render json: @product.to_json
   end
 
   def update
@@ -27,7 +27,7 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.find(params[:category_id])
-    render json: @products
+    render json: @products.to_json
   end
 
   private
