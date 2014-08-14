@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :set_shop
+  respond_to :html, :xml, :json, :js
 
   def new
     @category = Category.new
@@ -19,7 +20,9 @@ class CategoriesController < ApplicationController
 
   def show
     @category = Category.find(params[:id])
-    render json: @category
+    respond_with(@category) do |format|
+      format.js  { render :json => @category, :callback => params[:callback] }
+    end
   end
 
   def update
@@ -27,7 +30,9 @@ class CategoriesController < ApplicationController
 
   def index
     @categories = Category.find(params[:shop_id])
-    render json: @categories
+    respond_with(@categories) do |format|
+      format.js  { render :json => @categories, :callback => params[:callback] }
+    end
   end
 
   private

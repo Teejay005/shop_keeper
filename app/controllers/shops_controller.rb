@@ -1,7 +1,11 @@
 class ShopsController < ApplicationController
+  respond_to :html, :xml, :json, :js
+
   def index
   	@shop = Shop.all
-  	render json: @shop
+    respond_with(@shop) do |format|
+      format.js  { render :json => @shop, :callback => params[:callback] }
+    end
   end
 
   def create
@@ -27,7 +31,9 @@ class ShopsController < ApplicationController
 
   def show
   	@shop = Shop.find(params[:id])
-  	render json: @shop.to_json
+    respond_with(@shop) do |format|
+      format.js  { render :json => @shop, :callback => params[:callback] }
+    end
   end
 
   def delete

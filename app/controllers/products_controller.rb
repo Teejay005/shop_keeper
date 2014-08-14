@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   before_action :set_shop, :set_category
+  respond_to :html, :xml, :json, :js
 
   def new
       @product = Product.new
@@ -19,7 +20,9 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
-    render json: @product.to_json
+    respond_with(@product) do |format|
+      format.js  { render :json => @product, :callback => params[:callback] }
+    end
   end
 
   def update
@@ -27,7 +30,10 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.find(params[:category_id])
-    render json: @products.to_json
+
+    respond_with(@products) do |format|
+      format.js  { render :json => @products, :callback => params[:callback] }
+    end
   end
 
   private
